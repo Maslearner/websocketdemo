@@ -16,6 +16,12 @@ node {
         sh 'mvn clean install'
       
    }
+
+ stage('Publish Docker Image') {
+        withDockerRegistry([ credentialsId: "21eb79ca-af4c-4977-a5f1-e832b8763764", url: "" ]) {
+          sh 'docker push mashuk/spring-boot-websocket-chat-demo:0.0.1-SNAPSHOT'
+        }
+    }
    
   
    stage('Deploy Spring Boot Application') {
